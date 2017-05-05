@@ -1,0 +1,6 @@
+framework module Pods_APIlocation {
+  umbrella header "Pods-APIlocation-umbrella.h"
+
+  export *
+  module * { export * }
+}
