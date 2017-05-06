@@ -64,26 +64,26 @@
                                 <constraints>
                                     <constraint firstAttribute="height" constant="21" id="1Ic-zs-aJc"/>
                                 </constraints>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                 <color key="textColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KQz-B6-bXP">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KQz-B6-bXP">
                                 <rect key="frame" x="20" y="151" width="378" height="21"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="21" id="peH-ru-LMn"/>
                                 </constraints>
-                                <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                                <nil key="textColor"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                                <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UF4-Km-Po9">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UF4-Km-Po9">
                                 <rect key="frame" x="20" y="180" width="378" height="21"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="21" id="17V-bd-hMB"/>
                                 </constraints>
-                                <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                                <nil key="textColor"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                                <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
                             </label>
                         </subviews>
@@ -117,7 +117,9 @@
                     </view>
                     <navigationItem key="navigationItem" id="VMH-uW-l7h"/>
                     <connections>
+                        <outlet property="GoButton" destination="nDB-vs-hnW" id="HdE-rL-HxC"/>
                         <outlet property="greetLabel" destination="lFt-DC-IQ7" id="e0F-wX-5Yi"/>
+                        <outlet property="hideLabel" destination="tsV-vy-heV" id="0Gc-dP-EXF"/>
                         <outlet property="hostLabel" destination="KQz-B6-bXP" id="o8G-J0-qqQ"/>
                         <outlet property="ipLabel" destination="UF4-Km-Po9" id="j12-BQ-lMR"/>
                         <outlet property="map" destination="hod-cg-teU" id="NwK-rx-T1L"/>

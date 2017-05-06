@@ -14,7 +14,7 @@ import FBSDKLoginKit
 import FacebookLogin
 import FacebookCore
 
-class ViewController: UIViewController {
+class ViewController: UIViewController, FBSDKLoginButtonDelegate {
     
     @IBOutlet weak var textBox: UITextField!
     @IBOutlet weak var greetLabel: UILabel!
@@ -22,6 +22,7 @@ class ViewController: UIViewController {
     @IBOutlet weak var hideLabel: UILabel!
     @IBOutlet weak var hostLabel: UILabel!
     @IBOutlet weak var ipLabel: UILabel!
+    @IBOutlet weak var GoButton: UIButton!
     
     @IBAction func buttonPressed(_ sender: Any) {
         var input = ""
@@ -29,7 +30,7 @@ class ViewController: UIViewController {
             input = textBox.text!
         }else { return }
 
-        self.hideLabel.text = ""
+        self.hideLabel.text = " "
         getJSON(ipString: input)
     }
     func getJSON(ipString : String){
@@ -49,7 +50,7 @@ class ViewController: UIViewController {
                         self.updateMapView(jsonData: json)
                     }
                     else{ //show error here
-                        self.hideLabel.text = "Invalid URL or IP. Try Again!"
+                        self.hideLabel.text = "Invalid URL or IP."
                     }
                 }
             }
@@ -119,28 +120,50 @@ class ViewController: UIViewController {
     }
     
     func facebookLogin(){
-        let myLoginButton = UIButton(type: .custom)
-        myLoginButton.backgroundColor = UIColor.darkGray
-        myLoginButton.frame = CGRect(x: 0, y: 0, width: 180, height: 40)
-        myLoginButton.center = view.center
-//        myLoginButton.addTarget(self, action: @selector(self.loginButtonClicked), for: UIControlEvents.to)
-        view.addSubview(myLoginButton)
+        let xPos = GoButton.frame.origin.x - 50
+        let yPos = GoButton.frame.origin.y + 35
+        let loginButton = FBSDKLoginButton()
+        view.addSubview(loginButton)
+        loginButton.frame = CGRect(x: xPos ,y: yPos , width: 30, height: 25)
+        loginButton.delegate = self
     }
-    @objc func loginButtonClicked(){
-        let loginManager = LoginManager()
-        loginManager.logIn([.publicProfile],viewController: self) { loginResult in
-            switch loginResult{
-            case .failed(let error):
-                print(error)
-            case .cancelled:
-                print("User cancelled login.")
-            case .success(grantedPermissions: _, declinedPermissions: _, token: _):
-                print("Logged in!")
-            }
+    func loginButtonDidLogOut(_ loginButton: FBSDKLoginButton!) {
+        self.greetLabel.text = "Hi! Anonymous"
+    }
+    
+    func loginButton(_ loginButton: FBSDKLoginButton!, didCompleteWith result: FBSDKLoginManagerLoginResult!, error: Error!) {
+        if error != nil {
+            print(error)
+            return
         }
+        getFacebookData()
     }
+    
+    func getFacebookData(){
+        var fName : String = ""
+        var lName : String = ""
+        let request = FBSDKGraphRequest(graphPath: "me", parameters: ["fields":"first_name,last_name"])
+        request?.start(completionHandler: { (condition, result, error) -> Void in
+            if (error == nil){
+                if let fbDetails = result as? NSDictionary {
+                    fName = (fbDetails["first_name"] as! String)
+                    lName = (fbDetails["last_name"] as! String)
+                    self.greetLabel.text = "HI! " + fName + " " + lName
+                }
+            } else {
+                print(error?.localizedDescription ?? "Not found")
+            }
+        })
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        facebookLogin()
+        if(FBSDKAccessToken.current() == nil){ //not login
+            
+        }else { //already login
+            getFacebookData()
+        }
         // Do any additional setup after loading the view, typically from a nib.
     }
     
